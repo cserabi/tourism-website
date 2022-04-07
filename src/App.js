@@ -14,6 +14,7 @@ import PrivateRoute from "./Constext/PrivateRoute";
 import Notfound from "./components/NOTFOUND/Notfound";
 import Tourplace from "./components/TourPlace/Tourplace";
 import Contactus from "./components/ContactUs/Contactus";
+import AddReview from "./components/AddReview/AddReview";
 
 
 function App() {
@@ -69,6 +70,13 @@ function App() {
           <Route path="/contactus">
             <Contactus></Contactus>
           </Route>
+
+
+          <PrivateRoute exact path="/addreview">
+            <AddReview></AddReview>
+
+          </PrivateRoute>
+
 
           <Route path="*">
             <Notfound></Notfound>

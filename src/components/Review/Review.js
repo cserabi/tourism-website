@@ -1,58 +1,106 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { Button, Carousel } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 import './Review.css';
 
 const Review = () => {
+  const [newReview, setnewReview] = useState([]);
+
+
+  useEffect(() => {
+
+    fetch('https://stark-stream-58994.herokuapp.com/reviews')
+      .then(res => res.json())
+      .then(data => setnewReview(data))
+
+    console.log(newReview);
+  }, [])
+
+
+
+
+
+
   return (
-    <div className="container">
-      <div className="row">
-        <div className="col-md-4">
+    <div className="container-fluid">
+      <h4 className="text-center mt-4"> Client Recommendation and Experience </h4>
+      <div className="d-flex justify-content-center align-items-center flex-wrap">
 
-          <div className="card m-3" >
-            <img className="card-img-top card-images" src="http://2.bp.blogspot.com/-icxW5HXQXJo/VTb6e-XsjwI/AAAAAAAAArY/DanNut6qd18/s1600/Men%2Bshort%2Bhairstyle%2Bfor%2Bsquare%2Bface%2Bcool%2Bmen%2Bs%2Bhaircut%2Bfrom%2Bnick.jpg" alt="Card image cap" />
-            <div className="card-body">
-              <h5 className="card-title">Toren Ispum</h5>
-              <p className="card-text">It was great turist egency .I get best service from here. </p>
-              <div className="rating-setting">
-                <p className="justify-content-center align-items-center"><i className="fas fa-star icon-color"></i><i className="fas fa-star icon-color"></i><i className="fas fa-star icon-color"></i><i className="fas fa-star icon-color"></i><i className="fas fa-star icon-color"></i>(5)</p>
+        <div className="container-fluid">
+          <div className="row mt-4">
+            <div className="col-md-4"></div>
+
+            <div className="col-md-4">
+
+
+              <Carousel>
+
+                {
+                  newReview.map(reviewer =>
+
+
+                    <Carousel.Item>
+                      <img
+                        className="image-bg d-block w-100"
+                        src="https://media.istockphoto.com/vectors/triangles-background-vector-id940466680?k=20&m=940466680&s=612x612&w=0&h=jz32ccCcAVH_hFN-bnuelxQU0o5hgQrMFIR_lkMOsCc="
+
+                        alt="First slide"
+                      />
+
+
+
+                      <Carousel.Caption>
+                        <h3 className="text-dark text-center ">{reviewer.name} </h3>
+
+                        <p className="text-dark text-center">
+                        </p>
+
+
+
+                        <div style={{ color: '#ff3200' }}>
+
+                          {
+
+                            reviewer.review === '1' ? <i class="fas fa-star" />
+                              : reviewer.review === '2' ? <div><i class="fas fa-star" /> <i class="fas fa-star" /> </div>
+                                : reviewer.review === '3' ? <div><i class="fas fa-star" /><i class="fas fa-star" /> <i class="fas fa-star" /> </div>
+                                  : reviewer.review === '4' ? <div><i class="fas fa-star" /><i class="fas fa-star" /><i class="fas fa-star" /> <i class="fas fa-star" /> </div>
+                                    : reviewer.review === '5' ? <div><i class="fas fa-star" /><i class="fas fa-star" /><i class="fas fa-star" /><i class="fas fa-star" /> <i class="fas fa-star" /> </div>
+                                      : <p style={{ color: '#ff3200' }}>no review found </p>
+
+                          }
+                          {/* <div class="custom"></div> */}
+
+                        </div>
+
+
+                        <h5 className="text-dark text-center"> " {reviewer.comment} " </h5>
+
+                      </Carousel.Caption>
+                    </Carousel.Item>
+                  )
+                }
+
+
+
+              </Carousel>
+
+
+              <div className='row mt-4 mb-4'>
+                <Button className="w-50 button-add-review" as={Link} to="/addreview" >Add Review</Button>
               </div>
+
             </div>
+
+
+            <div className="col-md-4"></div>
+
           </div>
-        </div>
 
-        <div className="col-md-4">
-
-
-
-          <div className="card m-3" >
-            <img className="card-img-top card-images" src="https://thumbs.dreamstime.com/b/man-portrait-young-happy-smiling-face-male-model-crossed-arms-pose-black-background-guy-casual-fashion-clothing-studio-187062164.jpg" alt="Card image cap" />
-            <div className="card-body">
-              <h5 className="card-title">Jhonsoon Edenbaerg</h5>
-              <p className="card-text">Great Experience with Resort hub with great behaviour with us.</p>
-              <div className="rating-setting">
-                <p className="justify-content-center align-items-center"><i className="fas fa-star icon-color"></i><i className="fas fa-star icon-color"></i><i className="fas fa-star icon-color"></i><i className="fas fa-star icon-color"></i><i className="fas fa-star icon-color"></i>(5)</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div className="col-md-4">
-
-          <div className="card m-3" >
-            <img className="card-img-top card-images" src="https://cdn.shopify.com/s/files/1/0289/5858/9027/files/17_be828d98-0b7d-4833-b914-36c8b7fc1158.png" alt="Card image cap" />
-            <div className="card-body">
-              <h5 className="card-title">Wangsahng Randu</h5>
-              <p className="card-text">I am very satisfied to take service from here</p>
-              <div className="rating-setting">
-                <p className="justify-content-center align-items-center"><i className="fas fa-star icon-color"></i><i className="fas fa-star icon-color"></i><i className="fas fa-star icon-color"></i><i className="fas fa-star icon-color"></i><i className="fas fa-star icon-color"></i>(5)</p>
-              </div>
-            </div>
-          </div>
         </div>
 
 
       </div>
-
-
 
     </div>
   );

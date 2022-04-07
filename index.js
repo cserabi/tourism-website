@@ -14,7 +14,30 @@ async function run() {
     await client.connect();
     const database = client.db("insertDB");
     const userCollection = database.collection("user");
+    const reviewCollection = database.collection("reviews");
     // create a document to insert
+
+
+    //POST API
+
+    app.post('/reviews', async (req, res) => {
+      const addReview = req.body;
+      const result = await reviewCollection.insertOne(addReview);
+
+      console.log(addReview)
+
+      res.send(result);
+    })
+
+    // get API
+    app.get('/reviews', async (req, res) => {
+
+      const reviewcursor = reviewCollection.find({});
+      const reviewService = await reviewcursor.toArray();
+      res.json(reviewService);
+    })
+
+
     // post API
     app.post('/users', async (req, res) => {
 

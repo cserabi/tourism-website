@@ -1,17 +1,24 @@
-.contactus-color
+
+.bg-custom-pink
 {
   background-color: #E50081 !important;
   color:white;
+  margin-top: 30px;
+  margin-bottom: 30px;
 }
-.title-contactus{
-  color:#00ea0f !important;
-}
-.btn-submit
+
+
+
+.submit-btn
 {
-  background-color:#00ea0f !important;
+  background-color:#5608FF;
+  color:white !important;
+  border: 0px;
+  margin-left: 23%;
+  margin-bottom: 15px;
 }
-.btn-submit:hover{
+.submit-btn:hover{
   background-color: white !important;
-  color:#E50081;
+  color:#5608FF !important;
 
 }

@@ -1,74 +1,76 @@
-import React from 'react';
-import { Form, Row, Col, Button } from 'react-bootstrap';
-import './Contactus';
+import React, { useRef, useState } from 'react';
+import emailjs from '@emailjs/browser';
+import './Contactus.css';
+
+const Result = () => {
+  return (
+    <p >Your message has been successfully sent . We will contact you soon</p>
+  )
+}
 
 const Contactus = () => {
+  const form = useRef();
+
+  const [result, setresult] = useState(false);
+
+  const sendEmail = (e) => {
+    e.preventDefault();
+
+    emailjs.sendForm('service_fmlc9w4', 'template_xveh4tv', form.current, 'user_kJ9AIkdKE2TSnIaRha6XZ')
+      .then((result) => {
+        console.log(result.text);
+      }, (error) => {
+        console.log(error.text);
+      });
+
+
+    e.target.reset();
+    setresult(true);
+  };
+
+  //hide result
+
+  setTimeout(() => {
+    setresult(false)
+      ;
+  }, 5000)
+
   return (
-    <div>
-      <div className="container my-3">
-        <h3 className="title-contactus text-center">Contact Us </h3>
-        <div className="row">
-          <div className="col-md-2">
+    <div className='container'>
+      <div className='row'>
+        <div className='col-md-4'>
 
-          </div>
-          <div className="col-md-8 contactus-color shadow">
+        </div>
 
-            <Form>
+        <div className='col-md-4 bg-custom-pink'>
+          <form ref={form} onSubmit={sendEmail}>
 
-              <Row className="mb-3">
-                <Form.Group as={Col} controlId="formGridEmail">
-                  <Form.Label>Email</Form.Label>
-                  <Form.Control type="email" placeholder="Enter email" />
-                </Form.Group>
+            <h3 className='text-center'>Contact Us</h3>
+            <label>Name</label><br />
+            <input className="w-100" type="text" name="fullName" />
+            <br />
+            <label>Email</label><br />
+            <input className="w-100" type="email" name="email" />
+            <br />
+            <label>Phone</label><br />
+            <input className="w-100" type="text" name="phone" />
+            <br />
+            <label>Message</label><br />
+            <textarea className="w-100" name="message" />
+            <br />
+            <input className="w-50 text-center submit-btn" type="submit" value="Send" />
+            <div className='row m-3'>
 
-                <Form.Group as={Col} controlId="formGridPassword">
-                  <Form.Label>Password</Form.Label>
-                  <Form.Control type="password" placeholder="Password" />
-                </Form.Group>
-              </Row>
+              {result ? <Result /> : null}
 
-              <Form.Group className="mb-3" controlId="formGridAddress1">
-                <Form.Label>Address</Form.Label>
-                <Form.Control placeholder="1234 Main St" />
-              </Form.Group>
 
-              <Form.Group className="mb-3" controlId="formGridAddress2">
-                <Form.Label>Address 2</Form.Label>
-                <Form.Control placeholder="Apartment, studio, or floor" />
-              </Form.Group>
+            </div>
 
-              <Row className="mb-3">
-                <Form.Group as={Col} controlId="formGridCity">
-                  <Form.Label>City</Form.Label>
-                  <Form.Control />
-                </Form.Group>
 
-                <Form.Group as={Col} controlId="formGridState">
-                  <Form.Label>State</Form.Label>
-                  <Form.Select defaultValue="Choose...">
-                    <option>Choose...</option>
-                    <option>...</option>
-                  </Form.Select>
-                </Form.Group>
+          </form>
+        </div>
 
-                <Form.Group as={Col} controlId="formGridZip">
-                  <Form.Label>Zip</Form.Label>
-                  <Form.Control />
-                </Form.Group>
-              </Row>
-
-              <Form.Group className="mb-3" id="formGridCheckbox">
-                <Form.Check type="checkbox" label="Check me out" />
-              </Form.Group>
-
-              <Button variant="primary" className="my-3 btn-submit" type="submit">
-                Submit
-              </Button>
-            </Form>
-          </div>
-          <div className="col-md-2">
-
-          </div>
+        <div className='col-md-4'>
 
         </div>
       </div>

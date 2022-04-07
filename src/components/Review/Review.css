@@ -1,16 +1,22 @@
-.icon-color
+.image-bg
 {
-  color:rgb(255, 0, 128);
-}
-.card-images
-{
-  width: 200px;
-  height: 200px;
-  margin:10px auto;
-  
   border-radius: 50%;
 }
-.rating-setting
+
+.button-add-review
 {
-  margin-left:50px;
+  margin-left: 25%;
+  background-color:#E50081 ;
+   color:aliceblue;
+   border:0px;
+  
+
+}
+
+.button-add-review:hover{
+  margin-left: 25%;
+  background-color: #5608FF ;
+   color:aliceblue;
+   border:0px;
+
 }
